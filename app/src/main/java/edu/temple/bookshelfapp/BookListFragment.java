@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,7 +32,7 @@ public class BookListFragment extends Fragment {
         super.onAttach(context);
         parent = (BookSelectedInterface) context;
     }
-    
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -67,9 +68,16 @@ public class BookListFragment extends Fragment {
         ArrayList<HashMap <String, String>> hashMapArrayList = new ArrayList<>();
         hashMapArrayList.add(hashMap);
         ArrayAdapter<HashMap<String, String>> adapter = new ArrayAdapter<>((Context) parent, android.R.layout.simple_list_item_1, hashMapArrayList);
+        adapter.add(hashMap);
         listView.setAdapter(adapter);
         title.setText(hashMap.get(TITLE));
         author.setText(hashMap.get(AUTHOR));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                
+            }
+        });
         return view;
     }
 
