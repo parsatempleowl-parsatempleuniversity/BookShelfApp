@@ -22,6 +22,7 @@ public class BookListFragment extends Fragment {
 
     private final static String TITLE_KEY = "titleKey";
     private final static String AUTHOR_KEY = "authorKey";
+    private final static String HASHMAP_KEY = "hashMapKey";
     private View view;
     private OnBookSelectedInterface parent;
     private String title;
@@ -47,7 +48,7 @@ public class BookListFragment extends Fragment {
         Bundle bundle = new Bundle();
         BookListFragment bookListFragment = new BookListFragment();
         this.books = books;
-        bundle.putSerializable("hashMap", books);
+        bundle.putSerializable(HASHMAP_KEY, books);
         bookListFragment.setArguments(bundle);
      }
 
@@ -56,7 +57,7 @@ public class BookListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
        if (bundle != null) {
-           HashMap hashMap = (HashMap) bundle.getSerializable("HashMap");
+           HashMap hashMap = (HashMap) bundle.getSerializable(HASHMAP_KEY);
            if (hashMap != null) {
                title = (String) hashMap.get(TITLE_KEY);
                author = (String) hashMap.get(AUTHOR_KEY);
