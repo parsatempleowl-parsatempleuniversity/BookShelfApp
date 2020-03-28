@@ -14,8 +14,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
     FragmentManager fragmentManager = getSupportFragmentManager();
     boolean singleContainer;
-    BookDetailsFragment bookDetailsFragment;
-    BookListFragment bookListFragment;
+    BookDetailsFragment bookDetailsFragment = new BookDetailsFragment();
+    BookListFragment bookListFragment = new BookListFragment();
     HashMap book;
     ArrayList<HashMap <String, String>> hashMapArrayList = new ArrayList<>();
     HashMap<String, String> hashMap = new HashMap<>();
@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         bookDetailsFragment = null;
         book = null;
         hashMapArrayList = null;
+        bookListFragment = null;
+        hashMap = null;
     }
 
     @Override
