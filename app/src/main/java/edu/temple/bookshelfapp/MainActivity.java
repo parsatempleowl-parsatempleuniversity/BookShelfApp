@@ -2,6 +2,7 @@ package edu.temple.bookshelfapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.icu.text.CaseMap;
 import android.os.Bundle;
@@ -14,8 +15,10 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     FragmentManager fragmentManager = getSupportFragmentManager();
     boolean singleContainer;
     BookDetailsFragment bookDetailsFragment;
+    BookListFragment bookListFragment;
     HashMap book;
     ArrayList<HashMap <String, String>> hashMapArrayList = new ArrayList<>();
+    HashMap<String, String> hashMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             bookDetailsFragment = new BookDetailsFragment();
             fragmentManager.beginTransaction().replace(R.id.container_2, bookDetailsFragment).commit();
         }
-        HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("Book 1", "Author 1");
         hashMap.put("Book 2", "Author 2");
         hashMap.put("Book 3", "Author 3");
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         hashMap.put("Book 9", "Author 9");
         hashMap.put("Book 10", "Author 10");
         hashMapArrayList.add(hashMap);
+       bookListFragment.newInstance(hashMapArrayList);
     }
 
     @Override
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     public void bookSelected(int index) {
         book = hashMapArrayList.get(index);
         if (singleContainer) {
-            fragmentManager.beginTransaction().replace(R.id.container_1, bookDetailsFragment.newInstance(book)).addToBackStack(null).commit();
+            fragmentManager.beginTransaction().replace(R.id.container_1, bookDetailsFragment.newInstance().addToBackStack(null).commit();
         }
         else {
             bookDetailsFragment.displayBook(book);

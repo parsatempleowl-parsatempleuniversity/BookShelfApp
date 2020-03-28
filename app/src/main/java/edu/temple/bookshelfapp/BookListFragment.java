@@ -26,6 +26,7 @@ public class BookListFragment extends Fragment {
     private OnBookSelectedInterface parent;
     private String title;
     private String author;
+    private ArrayList<HashMap<String, String>> books;
 
     public BookListFragment() {
     }
@@ -42,21 +43,24 @@ public class BookListFragment extends Fragment {
         parent = null;
     }
 
-    public BookListFragment newInstance (ArrayList<HashMap> books) {
+     void newInstance(ArrayList<HashMap<String, String>> books) {
         Bundle bundle = new Bundle();
         BookListFragment bookListFragment = new BookListFragment();
-        bundle.putString(TITLE_KEY, AUTHOR_KEY);
+        this.books = books;
+        bundle.putSerializable("hashMap", books);
         bookListFragment.setArguments(bundle);
-        return bookListFragment;
-    }
+     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
        if (bundle != null) {
-           title = bundle.getString(TITLE_KEY);
-           author = bundle.getString(AUTHOR_KEY);
+           HashMap hashMap = (HashMap) bundle.getSerializable("HashMap");
+           if (hashMap != null) {
+               title = (String) hashMap.get(TITLE_KEY);
+               author = (String) hashMap.get(AUTHOR_KEY);
+           }
        }
     }
 
@@ -72,21 +76,7 @@ public class BookListFragment extends Fragment {
         ListView listView = view.findViewById(R.id.listView);
         TextView titleTextView = view.findViewById(R.id.titleTextView);
         TextView authorTextView = view.findViewById(R.id.authorTextView);
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("Book 1", "Author 1");
-        hashMap.put("Book 2", "Author 2");
-        hashMap.put("Book 3", "Author 3");
-        hashMap.put("Book 4", "Author 4");
-        hashMap.put("Book 5", "Author 5");
-        hashMap.put("Book 6", "Author 6");
-        hashMap.put("Book 7", "Author 7");
-        hashMap.put("Book 8", "Author 8");
-        hashMap.put("Book 9", "Author 9");
-        hashMap.put("Book 10", "Author 10");
-        ArrayList<HashMap <String, String>> hashMapArrayList = new ArrayList<>();
-        hashMapArrayList.add(hashMap);
-        ArrayAdapter<HashMap<String, String>> adapter = new ArrayAdapter<>((Context) parent, android.R.layout.simple_list_item_1, hashMapArrayList);
-        adapter.add(hashMap);
+        ArrayAdapter<HashMap<String, String>> adapter = new ArrayAdapter<>((Context) parent, android.R.layout.simple_list_item_1, books);
         listView.setAdapter(adapter);
         titleTextView.setText(title);
         authorTextView.setText(author);
