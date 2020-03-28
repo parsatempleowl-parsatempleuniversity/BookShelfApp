@@ -70,8 +70,8 @@ public class BookListFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_book_list, container, false);
         ListView listView = view.findViewById(R.id.listView);
-        TextView title = view.findViewById(R.id.titleTextView);
-        TextView author = view.findViewById(R.id.authorTextView);
+        TextView titleTextView = view.findViewById(R.id.titleTextView);
+        TextView authorTextView = view.findViewById(R.id.authorTextView);
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("Book 1", "Author 1");
         hashMap.put("Book 2", "Author 2");
@@ -88,8 +88,8 @@ public class BookListFragment extends Fragment {
         ArrayAdapter<HashMap<String, String>> adapter = new ArrayAdapter<>((Context) parent, android.R.layout.simple_list_item_1, hashMapArrayList);
         adapter.add(hashMap);
         listView.setAdapter(adapter);
-        title.setText(hashMap.get(TITLE_KEY));
-        author.setText(hashMap.get(AUTHOR_KEY));
+        titleTextView.setText(hashMap.get(TITLE_KEY));
+        authorTextView.setText(hashMap.get(AUTHOR_KEY));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
