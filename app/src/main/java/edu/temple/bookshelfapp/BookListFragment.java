@@ -70,8 +70,8 @@ public class BookListFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_book_list, container, false);
         ListView listView = view.findViewById(R.id.listView);
-        TextView title = view.findViewById(R.id.title);
-        TextView author = view.findViewById(R.id.author);
+        TextView title = view.findViewById(R.id.titleTextView);
+        TextView author = view.findViewById(R.id.authorTextView);
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("Book 1", "Author 1");
         hashMap.put("Book 2", "Author 2");

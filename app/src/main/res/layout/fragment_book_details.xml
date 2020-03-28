@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title"
@@ -25,7 +25,7 @@
             app:layout_constraintVertical_bias="0.39" />
 
         <TextView
-            android:id="@+id/author"
+            android:id="@+id/authorTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/author"
@@ -34,7 +34,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.486"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/titleTextView"
             app:layout_constraintVertical_bias="0.192" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
