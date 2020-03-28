@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -22,7 +23,9 @@ public class BookListFragment extends Fragment {
     private final static String TITLE_KEY = "titleKey";
     private final static String AUTHOR_KEY = "authorKey";
     private View view;
-    private BookSelectedInterface parent;
+    private OnBookSelectedInterface parent;
+    private String title;
+    private String author;
 
     public BookListFragment() {
     }
@@ -30,7 +33,7 @@ public class BookListFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        parent = (BookSelectedInterface) context;
+        parent = (OnBookSelectedInterface) context;
     }
 
     @Override
@@ -45,6 +48,16 @@ public class BookListFragment extends Fragment {
         bundle.putString(TITLE_KEY, AUTHOR_KEY);
         bookListFragment.setArguments(bundle);
         return bookListFragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+       if (bundle != null) {
+           title = bundle.getString(TITLE_KEY);
+           author = bundle.getString(AUTHOR_KEY);
+       }
     }
 
     @Override
@@ -75,7 +88,7 @@ public class BookListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                
+                BookListFragment.this.parent.bookSelected(position);
             }
         });
         return view;
@@ -87,7 +100,7 @@ public class BookListFragment extends Fragment {
         view = null;
     }
 
-    interface BookSelectedInterface {
-        void displayBookDetails();
+    interface OnBookSelectedInterface {
+        void bookSelected(int index);
     }
 }
