@@ -22,12 +22,14 @@ public class BookDetailsFragment extends Fragment {
     private View view;
     private TextView titleTextView;
     private TextView authorTextView;
+    HashMap book;
 
 
     public BookDetailsFragment() {
     }
 
-    public static BookDetailsFragment newInstance (HashMap book) {
+    public BookDetailsFragment newInstance(HashMap book) {
+        this.book = book;
         BookDetailsFragment bookDetailsFragment = new BookDetailsFragment();
         Bundle bundle = new Bundle();
         bundle.putString(TITLE_KEY, AUTHOR_KEY);
@@ -59,12 +61,12 @@ public class BookDetailsFragment extends Fragment {
         titleTextView = view.findViewById(R.id.titleTextView);
         authorTextView = view.findViewById(R.id.authorTextView);
         if ((titleTextView != null) && (authorTextView != null)) {
-            bookSelected();
+            displayBook(book);
         }
         return view;
     }
 
-    private void bookSelected() {
+    void displayBook(HashMap book) {
         titleTextView.setText(title);
         authorTextView.setText(author);
     }
