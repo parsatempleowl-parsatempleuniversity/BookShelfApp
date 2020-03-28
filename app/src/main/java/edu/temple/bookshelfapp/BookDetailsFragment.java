@@ -22,13 +22,13 @@ public class BookDetailsFragment extends Fragment {
     private View view;
     private TextView titleTextView;
     private TextView authorTextView;
-    HashMap book;
+    private HashMap book;
 
 
     public BookDetailsFragment() {
     }
 
-    public BookDetailsFragment newInstance(HashMap book) {
+    BookDetailsFragment newInstance(HashMap book) {
         this.book = book;
         BookDetailsFragment bookDetailsFragment = new BookDetailsFragment();
         Bundle bundle = new Bundle();
