@@ -32,7 +32,9 @@ public class BookDetailsFragment extends Fragment {
         this.book = book;
         BookDetailsFragment bookDetailsFragment = new BookDetailsFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(TITLE_KEY, AUTHOR_KEY);
+        title = (String) book.get(TITLE_KEY);
+        author = (String) book.get(AUTHOR_KEY);
+        bundle.putString(title, author);
         bookDetailsFragment.setArguments(bundle);
         return bookDetailsFragment;
     }

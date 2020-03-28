@@ -42,7 +42,7 @@ public class BookListFragment extends Fragment {
         parent = null;
     }
 
-    public static BookListFragment newInstance (ArrayList<HashMap> books) {
+    public BookListFragment newInstance (ArrayList<HashMap> books) {
         Bundle bundle = new Bundle();
         BookListFragment bookListFragment = new BookListFragment();
         bundle.putString(TITLE_KEY, AUTHOR_KEY);
@@ -88,8 +88,8 @@ public class BookListFragment extends Fragment {
         ArrayAdapter<HashMap<String, String>> adapter = new ArrayAdapter<>((Context) parent, android.R.layout.simple_list_item_1, hashMapArrayList);
         adapter.add(hashMap);
         listView.setAdapter(adapter);
-        titleTextView.setText(hashMap.get(TITLE_KEY));
-        authorTextView.setText(hashMap.get(AUTHOR_KEY));
+        titleTextView.setText(title);
+        authorTextView.setText(author);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
