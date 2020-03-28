@@ -21,7 +21,7 @@ public class BookListFragment extends Fragment {
     private final static String TITLE = "title";
     private final static String AUTHOR = "author";
     private View view;
-    private BookListInterface parent;
+    private BookSelectedInterface parent;
 
     public BookListFragment() {
     }
@@ -29,9 +29,9 @@ public class BookListFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        parent = (BookListInterface) context;
+        parent = (BookSelectedInterface) context;
     }
-
+    
     @Override
     public void onDetach() {
         super.onDetach();
@@ -79,7 +79,7 @@ public class BookListFragment extends Fragment {
         view = null;
     }
 
-    interface BookListInterface {
-        void displayBookList();
+    interface BookSelectedInterface {
+        void displayBookDetails();
     }
 }
