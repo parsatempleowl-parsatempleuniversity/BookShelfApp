@@ -1,7 +1,7 @@
 # BookShelf
 Extension of Assignment 7
 
-It will only work work with API of 22 or earlier.
+It will only work with API of 22 or earlier.
 
 ## What I have done for Assignment 8 submission
 1. I have created the Book class and added the required information to it. I also have replaced all of my previous references of HashMap<String, String> by the Book class.
