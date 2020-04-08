@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <item name="fragment_list_container" type="id" />
-    <item name="layout_portrait" type="id" />
-    <item name="fragment_details_container" type="id" />
-    <item name="layout_landscape" type="id" />
-    <item name="button" type="id" />
-    <item name="search" type="id" />
-</resources>
