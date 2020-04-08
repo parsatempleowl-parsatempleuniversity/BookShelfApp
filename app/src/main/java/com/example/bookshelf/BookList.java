@@ -14,7 +14,7 @@ public class BookDetailsFragment extends Fragment {
     private static final String BOOK_KEY2 = "book2";
     private Book book;
 
-    private TextView titleTextView, authorTextView;
+    TextView titleTextView, authorTextView;
 
     public BookDetailsFragment() {}
     static BookDetailsFragment newInstance(Book book) {
@@ -49,5 +49,10 @@ public class BookDetailsFragment extends Fragment {
     void displayBook(Book book) {
         titleTextView.setText(book.getTitle());
         authorTextView.setText(book.getAuthor());
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(BOOK_KEY2, book);
     }
 }

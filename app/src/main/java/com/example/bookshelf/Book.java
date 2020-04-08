@@ -1,37 +1,19 @@
 package com.example.bookshelf;
 
-public class Book {
-    String book_id,author,title,cover_url;
+import java.io.Serializable;
 
-    public String getBook_id() {
-        return book_id;
+public class Book implements Serializable {
+    private String title, author;
+
+    public Book( String author, String title){
+        this.title=title;
+        this.author=author;
     }
 
-    public void setBook_id(String book_id) {
-        this.book_id = book_id;
-    }
-
-    public String getAuthor() {
+    String getAuthor(){
         return author;
     }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getTitle() {
+    String getTitle(){
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getCover_url() {
-        return cover_url;
-    }
-
-    public void setCover_url(String cover_url) {
-        this.cover_url = cover_url;
     }
 }

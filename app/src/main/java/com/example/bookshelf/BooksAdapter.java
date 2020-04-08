@@ -5,30 +5,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class BooksAdapter extends BaseAdapter {
+public class BooksAdapter extends BaseAdapter implements Filterable {
+    private Context context;
+    private ArrayList booksList;
+    private ArrayList<Book> mStringFilterList;
+    private ValueFilter valueFilter;
 
-    Context context;
-    ArrayList<HashMap<String, String>> books;
-
-    public BooksAdapter (Context context, ArrayList books) {
+    BooksAdapter(Context context, ArrayList books) {
         this.context = context;
-        this.books = books;
+        this.booksList = books;
     }
 
     @Override
     public int getCount() {
-        return books.size();
+        return booksList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return books.get(position);
+        return booksList.get(position);
     }
 
     @Override
@@ -41,19 +43,63 @@ public class BooksAdapter extends BaseAdapter {
         TextView titleTextView, authorTextView;
 
         if (!(convertView instanceof LinearLayout)) {
-            /*
-            Inflate a predefined layout file that includes 2 text views.
-            We could do this in code, but this seems a little easier
-             */
-            convertView = LayoutInflater.from(context).inflate(R.layout.books_adapter_layout, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.book_adapter, parent, false);
         }
 
         titleTextView = convertView.findViewById(R.id.titleTextView);
         authorTextView = convertView.findViewById(R.id.authorTextView);
 
-        titleTextView.setText(((HashMap<String, String>) getItem(position)).get("title"));
-        authorTextView.setText(((HashMap<String, String>) getItem(position)).get("author"));
+        titleTextView.setText(booksList.get(position).getTitle());
+        authorTextView.setText(booksList.get(position).getAuthor());
 
         return convertView;
     }
+    @Override
+    public Filter getFilter() {
+        if(valueFilter==null){
+            valueFilter=new ValueFilter();
+        }
+        return valueFilter;
+    }
+
+    private class ValueFilter extends Filter{
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+
+            if (constraint != null && constraint.length() > 0) {
+                ArrayList<Book> filterList = new ArrayList<Book>();
+                for (int i = 0; i < mStringFilterList.size(); i++) {
+                    if ((mStringFilterList.get(i).getTitle().toUpperCase())
+                            .contains(constraint.toString().toUpperCase()) ||
+                            (mStringFilterList.get(i).getAuthor().toUpperCase())
+                                    .contains(constraint.toString().toUpperCase())) {
+
+                        Book bean = new Book(mStringFilterList.get(i)
+                                .getAuthor(), mStringFilterList.get(i)
+                                .getTitle());
+                        filterList.add(bean);
+                    }
+                }
+
+
+                results.count = filterList.size();
+                results.values = filterList;
+            } else {
+                results.count = mStringFilterList.size();
+                results.values = mStringFilterList;
+            }
+            return results;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint,
+                                      FilterResults results) {
+            booksList = (ArrayList<Book>) results.values;
+            notifyDataSetChanged();
+        }
+
+    }
+
 }

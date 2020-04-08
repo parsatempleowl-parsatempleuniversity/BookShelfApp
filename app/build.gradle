@@ -20,7 +20,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    useLibrary 'org.apache.http.legacy'
 
 }
 
@@ -33,8 +32,4 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    //library for api integration in android
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    //library for set image using url in android
-    implementation 'com.squareup.picasso:picasso:2.71828'
 }
